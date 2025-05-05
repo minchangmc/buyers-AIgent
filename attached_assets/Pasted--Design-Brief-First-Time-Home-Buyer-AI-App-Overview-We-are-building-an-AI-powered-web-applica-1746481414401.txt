@@ -1,0 +1,177 @@
+📌 Design Brief: First-Time Home Buyer AI App
+Overview:
+ We are building an AI-powered web application to guide first-time home buyers through the process of purchasing a home. The app will onboard users with a one-time orientation, allow them to analyze homes or areas through individual sessions, and provide ongoing conversational assistance using Claude AI.
+
+🎯 Key User Flows
+Orientation Flow (One-Time):
+
+
+First-time users answer a set of onboarding questions.
+
+
+Responses are stored and used to personalize later conversations with the AI.
+
+
+Home or Area Analysis:
+
+
+Users can start new sessions by entering a property address, city, or neighborhood.
+
+
+Each session stores relevant context (e.g. address, preferences).
+
+
+Chat interface becomes active per session for user to interact with AI.
+
+
+Chat Interaction:
+
+
+Real-time messaging interface (ChatGPT-style).
+
+
+Each message is a turn: user input → Claude AI response.
+
+
+Messages are grouped and stored per session.
+
+
+Session Management:
+
+
+Users can return to and continue previous analyses.
+
+
+Sessions are clearly named and timestamped.
+
+
+
+🖥️ Frontend Components (UI)
+Landing Page
+
+
+App intro + call to action
+
+
+Sign-in/register if auth is enabled
+
+
+Orientation Questionnaire Page
+
+
+One-time question flow (forms, multiple choice, etc.)
+
+
+Save responses locally or to backend
+
+
+Dashboard Page
+
+
+“Start New Analysis” button
+
+
+List of previous sessions with timestamps and summary
+
+
+Analysis Questionnaire Page
+
+
+Prompt user for:
+
+
+Property address OR
+
+
+City/Area of interest
+
+
+Chat Page (Per Session)
+
+
+Chat interface with scrolling message history
+
+
+Text input box
+
+
+Optionally: session context/sidebar
+
+
+
+🧠 Backend Responsibilities (App Logic)
+Session Routing:
+
+
+Handle creation of new sessions and retrieval of prior sessions
+
+
+Each session tagged to a property or location
+
+
+User State Management:
+
+
+Store orientation data, session data, message history
+
+
+Link sessions to a user (if auth is enabled)
+
+
+Message Handling:
+
+
+Forward user messages and relevant context to Claude AI
+
+
+Stream or deliver AI responses back to the frontend
+
+
+API Endpoints:
+
+
+POST /orientation
+
+
+POST /session
+
+
+GET /sessions
+
+
+POST /chat/:session_id
+
+
+Infrastructure Add-ons:
+
+
+Rate limiting per user/session
+
+
+Basic auth (optional for MVP)
+
+
+Caching of Claude responses if appropriate
+
+
+Claude API wrapper integration
+
+
+
+🧱 Tech Stack Notes
+Use non-opinionated stack choices:
+
+
+Frontend: Compatible with React, Vue, or plain HTML/CSS/JS
+
+
+Backend: Compatible with Node.js, Python (Flask/FastAPI), Go, or similar
+
+
+Claude API wrapper must support Claude model access via Anthropic
+
+
+Auth optional; can use JWT, cookies, or skip for MVP
+
+
+Use file-based storage or database (e.g., SQLite, Postgres) depending on scale

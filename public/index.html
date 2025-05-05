@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>First-Time Home Buyer Assistant</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div id="app">
+    <div class="landing-page" id="landing">
+      <h1>Welcome to Your Home Buying Journey</h1>
+      <p>Let AI guide you through the process of buying your first home</p>
+      <button onclick="startOrientation()">Get Started</button>
+    </div>
+
+    <div class="orientation hidden" id="orientation">
+      <h2>Let's Get to Know You</h2>
+      <form id="orientationForm">
+        <div class="form-group">
+          <label>What's your budget range?</label>
+          <input type="text" name="budget" required>
+        </div>
+        <div class="form-group">
+          <label>Preferred location?</label>
+          <input type="text" name="location" required>
+        </div>
+        <div class="form-group">
+          <label>Must-have features?</label>
+          <textarea name="features" required></textarea>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <div class="dashboard hidden" id="dashboard">
+      <h2>Your Home Search Dashboard</h2>
+      <button onclick="startNewAnalysis()">Start New Analysis</button>
+      <div id="sessionsList"></div>
+    </div>
+
+    <div class="analysis hidden" id="analysis">
+      <h2>Property Analysis</h2>
+      <form id="analysisForm">
+        <input type="text" name="address" placeholder="Enter property address" required>
+        <button type="submit">Analyze</button>
+      </form>
+    </div>
+
+    <div class="chat hidden" id="chat">
+      <div id="messages"></div>
+      <form id="chatForm">
+        <input type="text" id="messageInput" placeholder="Type your message...">
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>

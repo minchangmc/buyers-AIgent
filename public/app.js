@@ -7,10 +7,35 @@ function startOrientation() {
   document.getElementById('orientation').classList.remove('hidden');
 }
 
-document.getElementById('orientationForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const formData = new FormData(e.target);
-  const answers = Object.fromEntries(formData.entries());
+let orientationAnswers = {};
+
+function selectAnswer(questionNum, answer) {
+  orientationAnswers[`question${questionNum}`] = answer;
+  
+  const currentQuestion = document.getElementById(`question${questionNum}`);
+  const nextQuestion = questionNum === 3 && answer === 'Yes' 
+    ? document.getElementById('contextQuestion')
+    : document.getElementById(`question${questionNum + 1}`);
+    
+  currentQuestion.classList.remove('active');
+  
+  if (questionNum === 3 && answer === 'No') {
+    submitOrientation();
+    return;
+  }
+  
+  if (nextQuestion) {
+    setTimeout(() => {
+      nextQuestion.classList.add('active');
+    }, 300);
+  }
+}
+
+async function submitOrientation() {
+  const contextText = document.getElementById('additionalContext');
+  if (contextText && contextText.value) {
+    orientationAnswers.additionalContext = contextText.value;
+  }
   
   const response = await fetch('/api/orientation', {
     method: 'POST',

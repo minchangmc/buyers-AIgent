@@ -6,7 +6,48 @@ body {
   background: #f5f5f5;
 }
 
-.hidden { display: none; }
+.hidden { 
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.question {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.question-slider {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.answer-btn {
+  min-width: 120px;
+  padding: 12px 24px;
+  font-size: 16px;
+  transition: transform 0.2s;
+}
+
+.answer-btn:hover {
+  transform: scale(1.05);
+}
+
+#contextText {
+  width: 100%;
+  margin: 20px 0;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+}
 
 #app {
   max-width: 800px;

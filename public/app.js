@@ -40,7 +40,7 @@ async function submitOrientation() {
   const response = await fetch('/api/orientation', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ answers })
+    body: JSON.stringify({ answers: orientationAnswers })
   });
   
   const data = await response.json();
@@ -49,7 +49,7 @@ async function submitOrientation() {
   document.getElementById('orientation').classList.add('hidden');
   document.getElementById('dashboard').classList.remove('hidden');
   loadSessions();
-});
+}
 
 async function loadSessions() {
   const response = await fetch(`/api/sessions?userId=${userId}`);

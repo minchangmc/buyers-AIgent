@@ -128,3 +128,17 @@ input, textarea {
   background: #f5f5f5;
   margin-right: 20%;
 }
+
+.exit-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.exit-btn:hover {
+  background-color: #c82333;
+}

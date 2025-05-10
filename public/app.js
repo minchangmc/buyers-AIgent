@@ -119,3 +119,10 @@ function openSession(sessionId) {
   document.getElementById('dashboard').classList.add('hidden');
   document.getElementById('chat').classList.remove('hidden');
 }
+
+function exitToHome() {
+  document.getElementById('chat').classList.add('hidden');
+  document.getElementById('landing').classList.remove('hidden');
+  document.getElementById('messages').innerHTML = '';
+  currentSessionId = null;
+}

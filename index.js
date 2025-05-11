@@ -79,17 +79,6 @@ app.get('/api/sessions', (req, res) => {
   );
 });
 
-app.get('/api/chat/:sessionId/history', (req, res) => {
-  const { sessionId } = req.params;
-  db.all('SELECT * FROM messages WHERE session_id = ? ORDER BY timestamp ASC',
-    [sessionId],
-    (err, rows) => {
-      if (err) return res.status(500).json({ error: err.message });
-      res.json(rows);
-    }
-  );
-});
-
 app.post('/api/chat/:sessionId', async (req, res) => {
   const { message } = req.body;
   const { sessionId } = req.params;

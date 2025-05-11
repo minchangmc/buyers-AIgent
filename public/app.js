@@ -124,20 +124,30 @@ function appendMessage(content, isAi) {
 }
 
 async function openSession(sessionId) {
-  currentSessionId = sessionId;
-  document.getElementById('dashboard').classList.add('hidden');
-  document.getElementById('chat').classList.remove('hidden');
-  
-  // Clear existing messages
-  document.getElementById('messages').innerHTML = '';
-  
-  // Load chat history
-  const response = await fetch(`/api/chat/${sessionId}/history`);
-  const messages = await response.json();
-  
-  messages.forEach(msg => {
-    appendMessage(msg.content, msg.is_ai);
-  });
+  try {
+    currentSessionId = sessionId;
+    document.getElementById('dashboard').classList.add('hidden');
+    document.getElementById('chat').classList.remove('hidden');
+    
+    // Clear existing messages
+    document.getElementById('messages').innerHTML = '';
+    
+    // Load chat history
+    const response = await fetch(`/api/chat/${sessionId}/history`);
+    if (!response.ok) throw new Error('Failed to load chat history');
+    
+    const messages = await response.json();
+    if (Array.isArray(messages)) {
+      messages.forEach(msg => {
+        if (msg && typeof msg.content === 'string') {
+          appendMessage(msg.content, msg.is_ai === 1);
+        }
+      });
+    }
+  } catch (error) {
+    console.error('Failed to load session:', error);
+    appendMessage('Failed to load chat history. Please try again.', true);
+  }
 }
 
 function exitToHome() {

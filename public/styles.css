@@ -85,12 +85,31 @@ body {
 }
 
 button {
-  background: #007bff;
+  background: #4A5568;
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 12px 24px;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+button:hover {
+  background: #2D3748;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+#dashboard button {
+  background: #5A67D8;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+#dashboard button:hover {
+  background: #4C51BF;
 }
 
 .form-group {
@@ -156,28 +175,48 @@ input, textarea {
 }
 
 .session {
-  padding: 20px;
-  border: 1px solid #e1e4e8;
-  border-radius: 8px;
+  padding: 24px;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
   background: white;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .session:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  border-color: #007bff;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  border-color: #5A67D8;
+}
+
+.session::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: #5A67D8;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.session:hover::after {
+  opacity: 1;
 }
 
 .session h3 {
   margin: 0 0 10px 0;
-  color: #1a1a1a;
+  color: #2D3748;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .session p {
   margin: 0;
-  color: #666;
+  color: #718096;
   font-size: 14px;
 }

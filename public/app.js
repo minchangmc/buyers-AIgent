@@ -114,10 +114,21 @@ function appendMessage(content, isAi) {
   messages.scrollTop = messages.scrollHeight;
 }
 
-function openSession(sessionId) {
+async function openSession(sessionId) {
   currentSessionId = sessionId;
   document.getElementById('dashboard').classList.add('hidden');
   document.getElementById('chat').classList.remove('hidden');
+  
+  // Clear existing messages
+  document.getElementById('messages').innerHTML = '';
+  
+  // Load chat history
+  const response = await fetch(`/api/chat/${sessionId}/history`);
+  const messages = await response.json();
+  
+  messages.forEach(msg => {
+    appendMessage(msg.content, msg.is_ai);
+  });
 }
 
 function exitToHome() {

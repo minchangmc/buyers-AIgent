@@ -124,7 +124,7 @@ button:active {
   background: transparent;
   color: #64748B;
   padding: 8px;
-  margin-bottom: 15px;
+  margin: 0 0 15px auto;
   font-size: 20px;
   border-radius: 50%;
   width: 36px;

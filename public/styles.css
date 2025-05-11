@@ -148,3 +148,36 @@ input, textarea {
 .exit-btn:hover {
   background-color: #c82333;
 }
+
+#sessionsList {
+  display: grid;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.session {
+  padding: 20px;
+  border: 1px solid #e1e4e8;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.session:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border-color: #007bff;
+}
+
+.session h3 {
+  margin: 0 0 10px 0;
+  color: #1a1a1a;
+}
+
+.session p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}

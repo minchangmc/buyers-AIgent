@@ -121,15 +121,30 @@ button:active {
 
 /* Exit button */
 .exit-btn {
-  background: #EF4444;
-  padding: 10px 20px;
+  background: transparent;
+  color: #64748B;
+  padding: 8px;
   margin-bottom: 15px;
-  font-size: 14px;
-  border-radius: 12px;
+  font-size: 20px;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: none;
 }
 
 .exit-btn:hover {
-  background: #DC2626;
+  background: #F1F5F9;
+  color: #475569;
+  transform: none;
+}
+
+.exit-btn::before {
+  content: "×";
+  position: absolute;
 }
 
 /* Chat form button */

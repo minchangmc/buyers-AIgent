@@ -237,7 +237,7 @@ input, textarea {
 }
 
 .user-message {
-  background: linear-gradient(145deg, #2a2a2a, #232323);
+  background: linear-gradient(145deg, #3a3a3a, #333333);
   color: #e0e0e0;
   margin-left: auto;
 }

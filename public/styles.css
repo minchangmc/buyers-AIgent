@@ -111,22 +111,28 @@ input, textarea {
   border: 1px solid #ddd;
   padding: 10px;
   margin-bottom: 10px;
+  background: #fff;
+  border-radius: 8px;
 }
 
 .message {
   margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 12px;
+  border-radius: 8px;
+  max-width: 75%;
+  word-wrap: break-word;
 }
 
 .user-message {
-  background: #e3f2fd;
-  margin-left: 20%;
+  background: #007bff;
+  color: white;
+  margin-left: auto;
 }
 
 .ai-message {
-  background: #f5f5f5;
-  margin-right: 20%;
+  background: #f0f2f5;
+  color: #1c1e21;
+  margin-right: auto;
 }
 
 .exit-btn {

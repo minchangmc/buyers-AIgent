@@ -93,16 +93,25 @@ document.getElementById('chatForm').addEventListener('submit', async (e) => {
   const message = messageInput.value;
   messageInput.value = '';
   
-  appendMessage(message, false);
+  if (!message.trim()) return;
   
-  const response = await fetch(`/api/chat/${currentSessionId}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message })
-  });
-  
-  const data = await response.json();
-  appendMessage(data.response, true);
+  try {
+    appendMessage(message, false);
+    
+    const response = await fetch(`/api/chat/${currentSessionId}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message })
+    });
+    
+    if (!response.ok) throw new Error('Failed to send message');
+    
+    const data = await response.json();
+    appendMessage(data.response, true);
+  } catch (error) {
+    console.error('Chat error:', error);
+    appendMessage('Sorry, there was an error processing your message. Please try again.', true);
+  }
 });
 
 function appendMessage(content, isAi) {

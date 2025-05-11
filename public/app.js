@@ -122,7 +122,8 @@ function openSession(sessionId) {
 
 function exitToHome() {
   document.getElementById('chat').classList.add('hidden');
-  document.getElementById('landing').classList.remove('hidden');
+  document.getElementById('dashboard').classList.remove('hidden');
   document.getElementById('messages').innerHTML = '';
   currentSessionId = null;
+  loadSessions();
 }

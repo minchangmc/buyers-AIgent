@@ -95,19 +95,16 @@ app.post('/api/chat/:sessionId', async (req, res) => {
   const { sessionId } = req.params;
   
   try {
-    const completion = await anthropic.messages.create({
-      messages: [{ role: 'user', content: message }],
-      model: 'claude-3-opus-20240229',
-      max_tokens: 1000,
-    });
+    // Dummy response for testing
+    const dummyResponse = "This is a test response from the AI assistant. I understand you said: " + message;
 
     db.run('INSERT INTO messages (session_id, content, is_ai) VALUES (?, ?, ?)',
       [sessionId, message, false]);
     
     db.run('INSERT INTO messages (session_id, content, is_ai) VALUES (?, ?, ?)',
-      [sessionId, completion.content, true]);
+      [sessionId, dummyResponse, true]);
 
-    res.json({ response: completion.content });
+    res.json({ response: dummyResponse });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

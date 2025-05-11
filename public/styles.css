@@ -2,7 +2,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   margin: 0;
   padding: 20px;
-  background: #f5f5f5;
+  background: #121212;
+  color: #e0e0e0;
 }
 
 .hidden { 
@@ -49,10 +50,11 @@ body {
 #app {
   max-width: 800px;
   margin: 0 auto;
-  background: white;
+  background: linear-gradient(145deg, #1a1a1a, #242424);
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
 /* Base button styles */
@@ -164,20 +166,29 @@ button:active {
 
 input, textarea {
   width: 100%;
-  padding: 8px;
+  padding: 12px;
   margin-top: 5px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  background: #1a1a1a;
+  color: #e0e0e0;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #4F46E5;
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
 }
 
 #messages {
   height: 400px;
   overflow-y: auto;
-  border: 1px solid #ddd;
+  border: 1px solid rgba(255,255,255,0.1);
   padding: 10px;
   margin-bottom: 10px;
-  background: #fff;
+  background: #1a1a1a;
   border-radius: 8px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .session {
@@ -216,15 +227,23 @@ input, textarea {
 
 .session h3 {
   margin: 0 0 10px 0;
-  color: #2D3748;
+  color: #e0e0e0;
   font-size: 18px;
   font-weight: 600;
 }
 
 .session p {
   margin: 0;
-  color: #718096;
+  color: #a0a0a0;
   font-size: 14px;
+}
+
+h1, h2, h3 {
+  color: #e0e0e0;
+}
+
+p {
+  color: #a0a0a0;
 }
 
 .message {

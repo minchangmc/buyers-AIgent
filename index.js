@@ -125,7 +125,6 @@ app.post('/api/chat/:sessionId', async (req, res) => {
 User orientation data: ${userDataQuery.orientation_data}`;
 
     const messages = [
-      { role: "system", content: systemPrompt },
       ...historyQuery.map(msg => ({
         role: msg.is_ai ? "assistant" : "user",
         content: msg.content
@@ -136,6 +135,7 @@ User orientation data: ${userDataQuery.orientation_data}`;
     const response = await anthropic.messages.create({
       model: "claude-3-sonnet-20240229",
       max_tokens: 1000,
+      system: systemPrompt,
       messages: messages,
     });
 

@@ -169,6 +169,11 @@ async function openSession(sessionId) {
   }
 }
 
+function exitAnalysis() {
+  document.getElementById('analysis').classList.add('hidden');
+  document.getElementById('dashboard').classList.remove('hidden');
+}
+
 function exitToHome() {
   document.getElementById('chat').classList.add('hidden');
   document.getElementById('dashboard').classList.remove('hidden');

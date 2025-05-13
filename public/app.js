@@ -2,6 +2,11 @@
 let userId = null;
 let currentSessionId = null;
 
+function getStarted() {
+  document.getElementById('landing').classList.add('hidden');
+  document.getElementById('dashboard').classList.remove('hidden');
+}
+
 function startNewAnalysis() {
   document.getElementById('dashboard').classList.add('hidden');
   document.getElementById('analysis').classList.remove('hidden');

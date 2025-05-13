@@ -98,13 +98,46 @@ app.post('/api/chat/:sessionId', async (req, res) => {
     db.run('INSERT INTO messages (session_id, content, is_ai) VALUES (?, ?, ?)',
       [sessionId, message, false]);
 
+    // Get user's orientation data
+    const userDataQuery = await new Promise((resolve, reject) => {
+      db.get('SELECT orientation_data FROM users WHERE id = (SELECT user_id FROM sessions WHERE id = ?)', 
+        [sessionId], 
+        (err, row) => err ? reject(err) : resolve(row)
+      );
+    });
+
+    // Get property address
+    const sessionQuery = await new Promise((resolve, reject) => {
+      db.get('SELECT property_address FROM sessions WHERE id = ?',
+        [sessionId],
+        (err, row) => err ? reject(err) : resolve(row)
+      );
+    });
+
+    // Get conversation history
+    const historyQuery = await new Promise((resolve, reject) => {
+      db.all('SELECT content, is_ai FROM messages WHERE session_id = ? ORDER BY timestamp ASC',
+        [sessionId],
+        (err, rows) => err ? reject(err) : resolve(rows)
+      );
+    });
+
+    const systemPrompt = `You are a first-time home buyer assistant analyzing the property at: ${sessionQuery.property_address}.
+User orientation data: ${userDataQuery.orientation_data}`;
+
+    const messages = [
+      { role: "system", content: systemPrompt },
+      ...historyQuery.map(msg => ({
+        role: msg.is_ai ? "assistant" : "user",
+        content: msg.content
+      })),
+      { role: "user", content: message }
+    ];
+
     const response = await anthropic.messages.create({
       model: "claude-3-opus-20240229",
       max_tokens: 1024,
-      messages: [{ 
-        role: "user", 
-        content: message 
-      }],
+      messages: messages,
     });
 
     const aiResponse = response.content[0].text;

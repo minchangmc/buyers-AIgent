@@ -95,18 +95,27 @@ app.post('/api/chat/:sessionId', async (req, res) => {
   const { sessionId } = req.params;
   
   try {
-    // Dummy response for testing
-    const dummyResponse = "This is a test response from the AI assistant. I understand you said: " + message;
-
     db.run('INSERT INTO messages (session_id, content, is_ai) VALUES (?, ?, ?)',
       [sessionId, message, false]);
+
+    const response = await anthropic.messages.create({
+      model: "claude-3-opus-20240229",
+      max_tokens: 1024,
+      messages: [{ 
+        role: "user", 
+        content: message 
+      }],
+    });
+
+    const aiResponse = response.content[0].text;
     
     db.run('INSERT INTO messages (session_id, content, is_ai) VALUES (?, ?, ?)',
-      [sessionId, dummyResponse, true]);
+      [sessionId, aiResponse, true]);
 
-    res.json({ response: dummyResponse });
+    res.json({ response: aiResponse });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error('Claude API Error:', error);
+    res.status(500).json({ error: "Failed to get AI response" });
   }
 });
 

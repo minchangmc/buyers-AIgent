@@ -303,6 +303,27 @@ p {
   margin: 4px 0;
 }
 
+.message-section {
+  margin-bottom: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.message-section:last-child {
+  border-bottom: none;
+}
+
+.message-section h4 {
+  margin: 0 0 8px 0;
+  color: #6366f1;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.message-section p {
+  margin: 0;
+}
+
 .user-message {
   background: linear-gradient(145deg, #3a3a3a, #333333);
   color: #e0e0e0;

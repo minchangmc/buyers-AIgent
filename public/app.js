@@ -6,8 +6,16 @@ function formatMessage(content) {
   // Convert bullet points
   content = content.replace(/\n[-*•] /g, '\n• ');
   
-  // Convert paragraphs
-  content = content.split('\n\n').map(p => `<p>${p}</p>`).join('');
+  // Convert sections with headers
+  content = content.replace(/([A-Z][^:]+):\s*([^\n]+)/g, '<div class="message-section"><h4>$1</h4><p>$2</p></div>');
+  
+  // Convert remaining paragraphs
+  content = content.split('\n\n').map(p => {
+    if (!p.includes('class="message-section"')) {
+      return `<p>${p}</p>`;
+    }
+    return p;
+  }).join('');
   
   return content;
 }
@@ -49,7 +57,6 @@ document.getElementById('analysisForm').addEventListener('submit', async (e) => 
   const formData = new FormData(e.target);
   
   const orientationData = {
-    propertyType: formData.get('propertyType'),
     propertyAddress: formData.get('address'),
     additionalContext: formData.get('additionalContext')
   };
@@ -80,7 +87,6 @@ document.getElementById('analysisForm').addEventListener('submit', async (e) => 
   // Generate initial AI analysis
   const initialPrompt = `Please analyze this property:
 Address: ${orientationData.propertyAddress}
-Property Type: ${orientationData.propertyType}
 Additional Context: ${orientationData.additionalContext}
 
 Please provide an initial analysis of this property based on the information provided.`;

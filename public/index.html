@@ -15,40 +15,7 @@
       <button onclick="startOrientation()">Get Started</button>
     </div>
 
-    <div class="orientation hidden" id="orientation">
-      <h2>Let's Get to Know You</h2>
-      <div class="question-container">
-        <div class="question active" id="question1">
-          <h3>What are you looking to do?</h3>
-          <div class="button-group">
-            <button class="answer-btn" onclick="selectAnswer(1, 'Buy')">Buy</button>
-          </div>
-        </div>
-
-        <div class="question" id="question2">
-          <h3>What type of property?</h3>
-          <div class="button-group">
-            <button class="answer-btn" onclick="selectAnswer(2, 'Houses')">Houses</button>
-            <button class="answer-btn" onclick="selectAnswer(2, 'Condos/Apartments')">Condos/Apartments</button>
-            <button class="answer-btn" onclick="selectAnswer(2, 'Townhomes')">Townhomes</button>
-          </div>
-        </div>
-
-        <div class="question" id="question3">
-          <h3>Would you like to add additional context?</h3>
-          <div class="button-group">
-            <button class="answer-btn" onclick="selectAnswer(3, 'Yes')">Yes</button>
-            <button class="answer-btn" onclick="selectAnswer(3, 'No')">No</button>
-          </div>
-        </div>
-
-        <div class="question" id="contextQuestion">
-          <h3>Additional Context</h3>
-          <textarea id="additionalContext" rows="4" placeholder="Please provide any additional information..."></textarea>
-          <button class="submit-btn" onclick="submitOrientation()">Submit</button>
-        </div>
-      </div>
-    </div>
+    
 
     <div class="dashboard hidden" id="dashboard">
       <h2>Your Home Search Dashboard</h2>
@@ -57,10 +24,25 @@
     </div>
 
     <div class="analysis hidden" id="analysis">
-      <h2>Property Analysis</h2>
+      <h2>New Property Analysis</h2>
       <form id="analysisForm">
-        <input type="text" name="address" placeholder="Enter property address" required>
-        <button type="submit">Analyze</button>
+        <div class="form-group">
+          <label>Property Address</label>
+          <input type="text" name="address" placeholder="Enter property address" required>
+        </div>
+        <div class="form-group">
+          <label>Property Type</label>
+          <select name="propertyType" required>
+            <option value="Houses">House</option>
+            <option value="Condos/Apartments">Condo/Apartment</option>
+            <option value="Townhomes">Townhome</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Additional Context</label>
+          <textarea name="additionalContext" rows="4" placeholder="Add any additional information about your search..."></textarea>
+        </div>
+        <button type="submit">Start Analysis</button>
       </form>
     </div>
 

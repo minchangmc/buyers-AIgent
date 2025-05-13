@@ -130,7 +130,7 @@ app.post("/api/chat/:sessionId", async (req, res) => {
       );
     });
 
-    const systemPrompt = `You are a home buyer assistant analyzing property. You will receive a link from any of the following: Redfin or Zillow at: ${sessionQuery.property_address}. You'll also receive additional context from the user: ${userDataQuery.orientation_data}
+    const systemPrompt = `You are a home buyer assistant analyzing property. You will receive a link from any of the following: Redfin, Zillow, Realtor, Trulia, etc at: ${sessionQuery.property_address}. You'll also receive additional context from the user: ${userDataQuery.orientation_data}
     Scrape that page for information on the house and give a brief friendly response as to what the best things to know. `;
 
     const messages = [

@@ -35,8 +35,8 @@ document.getElementById('analysisForm').addEventListener('submit', async (e) => 
   const formData = new FormData(e.target);
   
   const orientationData = {
-    question1: "Buy",
-    question2: formData.get('propertyType'),
+    propertyType: formData.get('propertyType'),
+    propertyAddress: formData.get('address'),
     additionalContext: formData.get('additionalContext')
   };
 
@@ -63,8 +63,33 @@ document.getElementById('analysisForm').addEventListener('submit', async (e) => 
   const data = await response.json();
   currentSessionId = data.sessionId;
   
-  document.getElementById('analysis').classList.add('hidden');
-  document.getElementById('chat').classList.remove('hidden');
+  // Generate initial AI analysis
+  const initialPrompt = `Please analyze this property:
+Address: ${orientationData.propertyAddress}
+Property Type: ${orientationData.propertyType}
+Additional Context: ${orientationData.additionalContext}
+
+Please provide an initial analysis of this property based on the information provided.`;
+
+  try {
+    const aiResponse = await fetch(`/api/chat/${data.sessionId}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: initialPrompt })
+    });
+
+    if (!aiResponse.ok) throw new Error('Failed to get AI response');
+    
+    const aiData = await aiResponse.json();
+    
+    document.getElementById('analysis').classList.add('hidden');
+    document.getElementById('chat').classList.remove('hidden');
+    appendMessage(initialPrompt, false);
+    appendMessage(aiData.response, true);
+  } catch (error) {
+    console.error('Chat error:', error);
+    appendMessage('Sorry, there was an error starting the analysis. Please try again.', true);
+  }
 });
 
 document.getElementById('chatForm').addEventListener('submit', async (e) => {

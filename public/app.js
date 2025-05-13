@@ -1,4 +1,18 @@
 
+function formatMessage(content) {
+  // Convert URLs to clickable links
+  content = content.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>');
+  
+  // Convert bullet points
+  content = content.replace(/\n[-*•] /g, '\n• ');
+  
+  // Convert paragraphs
+  content = content.split('\n\n').map(p => `<p>${p}</p>`).join('');
+  
+  return content;
+}
+
+
 let userId = null;
 let currentSessionId = null;
 
@@ -123,7 +137,7 @@ function appendMessage(content, isAi) {
   const messages = document.getElementById('messages');
   const messageDiv = document.createElement('div');
   messageDiv.className = `message ${isAi ? 'ai-message' : 'user-message'}`;
-  messageDiv.textContent = content;
+  messageDiv.innerHTML = formatMessage(content);
   messages.appendChild(messageDiv);
   messages.scrollTop = messages.scrollHeight;
 }

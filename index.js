@@ -1,4 +1,3 @@
-
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
@@ -26,7 +25,7 @@ db.serialize(() => {
     id INTEGER PRIMARY KEY,
     orientation_data TEXT
   )`);
-  
+
   db.run(`CREATE TABLE IF NOT EXISTS sessions (
     id INTEGER PRIMARY KEY,
     user_id INTEGER,
@@ -34,7 +33,7 @@ db.serialize(() => {
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY(user_id) REFERENCES users(id)
   )`);
-  
+
   db.run(`CREATE TABLE IF NOT EXISTS messages (
     id INTEGER PRIMARY KEY,
     session_id INTEGER,
@@ -93,7 +92,7 @@ app.get('/api/chat/:sessionId/history', (req, res) => {
 app.post('/api/chat/:sessionId', async (req, res) => {
   const { message } = req.body;
   const { sessionId } = req.params;
-  
+
   try {
     db.run('INSERT INTO messages (session_id, content, is_ai) VALUES (?, ?, ?)',
       [sessionId, message, false]);
@@ -135,13 +134,13 @@ User orientation data: ${userDataQuery.orientation_data}`;
     ];
 
     const response = await anthropic.messages.create({
-      model: "claude-3-opus-20240229",
+      model: "claude-3-sonnet-20240229",
       max_tokens: 1024,
       messages: messages,
     });
 
     const aiResponse = response.content[0].text;
-    
+
     db.run('INSERT INTO messages (session_id, content, is_ai) VALUES (?, ?, ?)',
       [sessionId, aiResponse, true]);
 
